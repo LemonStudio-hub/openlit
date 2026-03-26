@@ -30,6 +30,12 @@ const router = createRouter({
       component: () => import('../views/WorkEditor.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/read/:workId/:chapterId',
+      name: 'Reader',
+      component: () => import('../views/Reader.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

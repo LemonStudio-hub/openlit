@@ -2,6 +2,9 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import userRoutes from './routes/users'
 import workRoutes from './routes/works'
+import bookmarkRoutes from './routes/bookmarks'
+import noteRoutes from './routes/notes'
+import progressRoutes from './routes/progress'
 
 type Bindings = {
   DB: D1Database
@@ -35,5 +38,8 @@ app.get('/api/health', (c) => {
 // 挂载路由
 app.route('/api/auth', userRoutes)
 app.route('/api/works', workRoutes)
+app.route('/api/bookmarks', bookmarkRoutes)
+app.route('/api/notes', noteRoutes)
+app.route('/api/progress', progressRoutes)
 
 export default app

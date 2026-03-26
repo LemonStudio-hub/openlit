@@ -133,6 +133,66 @@ class ApiService {
       method: 'DELETE',
     })
   }
+
+  // 书签 API
+  async getBookmarks() {
+    return this.request('/api/bookmarks')
+  }
+
+  async createBookmark(data: { work_id: string; chapter_id: string; position?: number; note?: string }) {
+    return this.request('/api/bookmarks', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  }
+
+  async deleteBookmark(id: string) {
+    return this.request(`/api/bookmarks/${id}`, {
+      method: 'DELETE',
+    })
+  }
+
+  // 笔记 API
+  async getNotes(params?: { work_id?: string; chapter_id?: string }) {
+    const query = params ? `?${new URLSearchParams(params as any)}` : ''
+    return this.request(`/api/notes${query}`)
+  }
+
+  async createNote(data: { work_id: string; chapter_id: string; content: string; position?: number }) {
+    return this.request('/api/notes', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  }
+
+  async updateNote(id: string, content: string) {
+    return this.request(`/api/notes/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ content }),
+    })
+  }
+
+  async deleteNote(id: string) {
+    return this.request(`/api/notes/${id}`, {
+      method: 'DELETE',
+    })
+  }
+
+  // 阅读进度 API
+  async updateProgress(data: { work_id: string; chapter_id: string; position?: number; percentage?: number }) {
+    return this.request('/api/progress', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  }
+
+  async getProgress() {
+    return this.request('/api/progress')
+  }
+
+  async getWorkProgress(workId: string) {
+    return this.request(`/api/progress/work/${workId}`)
+  }
 }
 
 export const api = new ApiService()
